@@ -10,7 +10,7 @@ Clone the repo and create install the requirements with
 ```pip install -r requirements.txt```
 
 ## Training
-You can start a training with `python train.py`
+Start a training with `python train.py`
 
 In the `config.yaml` file, you can change experiment and training hyperparameters.
 
