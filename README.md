@@ -1,7 +1,7 @@
 # Deep Counterfactual Regret Minimization
 An implementation of <cite>[Brown et al. 2019][1]</cite> with some adaptations.
 
-DeepCFR is an approach to solve Counterfactual Regret Minimization by using a neural network to learn the relations between information sets and action probabilities, rather than using a tabular approach.
+DeepCFR is an approach to solve Counterfactual Regret Minimization by using a neural network to learn the relation between information sets and action probabilities, rather than using a tabular approach.
 
 This implementation applies DeepCRF to Texas Holdem No Limit poker.
 
