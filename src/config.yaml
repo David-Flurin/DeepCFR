@@ -1,0 +1,14 @@
+experiment:
+  n_players: 2
+  name: test
+
+cfr:
+  iterations: 10
+  sampler_iterations: 1000
+  start_stack: 200
+  min_stack: 50
+
+training:
+  samples: 1000000
+  epochs: 300
+  batch_size: 4000
