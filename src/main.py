@@ -29,9 +29,6 @@ if __name__ == "__main__":
         help="Set the logging level",
     )
 
-
-
-    # Example usage
     config = load_config()
     args = parser.parse_args()
 
