@@ -36,7 +36,7 @@ class DeepCRF:
     """
     Representation of the deep counterfactual regret minimization algorithm for Texas Holdem No Limit Poker.
     """
-    def __init__(self, n_players: int, memory_size: int, name=None, n_iterations=10, sampler_iterations=1000, start_stack=200, min_stack=50, n_samples=1000000, n_epochs = 1000, batch_size=4000):
+    def __init__(self, n_players: int, memory_size: int, name=None, n_iterations=10, sampler_iterations=1000, start_stack=200, min_stack=50, n_samples=1000000, n_epochs = 1000, batch_size=4000, max_workers=8):
         self.n_players = n_players
         self.memory_size = memory_size
         self.n_samples = n_samples
@@ -54,9 +54,7 @@ class DeepCRF:
 
         self.memory_manager = MM(n_players, memory_size, self.path)
 
-        self.sampler = Sampler(n_players, self.memory_manager, self.model_manager, sampler_iterations, start_stack, min_stack)
-
-
+        self.sampler = Sampler(n_players, self.memory_manager, self.model_manager, sampler_iterations, start_stack, min_stack, max_workers)
 
     def run(self):
         """
@@ -94,7 +92,8 @@ class DeepCRF:
         Run a training loop for player p.
         """
         self.model_manager.train_p(p)
-        trainer = Trainer(self.model_manager.get_p_model(p), Adam(self.model_manager.get_p_model(p).parameters(), 0.001, (0.9, 0.999)), weighted_mse_loss, self.memory_manager.p_memory[p], self.n_samples, iteration)
+        model = self.model_manager.get_p_model(p, device)
+        trainer = Trainer(model, Adam(model.parameters(), 0.001, (0.9, 0.999)), weighted_mse_loss, self.memory_manager.p_memory[p], self.n_samples, iteration)
         trainer.train(self.n_epochs, self.batch_size)
 
         

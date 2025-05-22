@@ -1,12 +1,13 @@
 experiment:
   n_players: 2
-  name: test
+  name: mp_test
 
 cfr:
   iterations: 10
   sampler_iterations: 1000
   start_stack: 200
   min_stack: 50
+  max_workers: 8
 
 training:
   samples: 1000000

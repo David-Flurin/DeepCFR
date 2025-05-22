@@ -42,6 +42,7 @@ if __name__ == "__main__":
                         config['cfr']['min_stack'],
                         config['training']['samples'], 
                         config['training']['epochs'], 
-                        config['training']['batch_size'])
+                        config['training']['batch_size'],
+                        config['cfr']['max_workers'])
 
     deep_crf.run()

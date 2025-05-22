@@ -8,7 +8,7 @@ from memory.memory import Memory
 device = torch.device("mps" if torch.mps.is_available() else "cpu")
 
 class Trainer:
-    def __init__(self, model, optimizer, loss_fn, memory:Memory, n_samples: int, iteration: int):
+    def __init__(self, model: torch.nn.Module, optimizer, loss_fn, memory:Memory, n_samples: int, iteration: int):
         self.model = model
         self.optimizer = optimizer
         self.loss_fn = loss_fn
@@ -17,12 +17,7 @@ class Trainer:
         
 
     def train(self, epochs, batch_size):
-        print("TRAINING , dataset size: ", len(self.dataset))
         for epoch in range(epochs):
-
-            # if epoch == round(epochs * 0.5):
-            #     log.info("Reducing learning rate to 0.0001")
-            #     self.optimizer.param_groups[0]['lr'] = 0.0001
 
             data_loader = DataLoader(self.dataset, batch_size=batch_size, shuffle=True)
             self.model.train()
